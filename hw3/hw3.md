@@ -52,16 +52,11 @@ For uniform hemisphere sampling, I first found the number of samples needed (usi
 
 For importance sampling, I did a similar approach, except this time I iterated through all of the lights in the scene, and checked if it was a point light source. If it was, then I only needed to do one sample. Else, I would sample `num_samples` times from the light, and once again, create a ray along with a shadow ray similarly as above. If there was an intersection between the shadow_ray and the scene, then I know that the hit point is in a shadow. If there were no intersections, then I could calculate the irradiance, and use the given pdf value to calculate how much it contributed. I then summed, and averaged once again and then returned `L_out`.
 
-<center>
-Light Sampling
-</center>
-
+### Light Sampling
 | ![](bunny_64_32.png)  <center><b>*bunny.png*</b></center>| ![](CBspheres_lambertian_64_32.png)  <center><b>*CBlucy.png*</b></center>|
 |--|--|
 
-<center>
-Uniform Hemisphere Sampling	
-</center>
+### Uniform Hemisphere Sampling	
 
 | ![](bunny_64_32H.png)  <center><b>*bunny.png*</b></center>| ![](CBspheres_lambertian_64_32H.png)  <center><b>*CBlucy.png*</b></center>|
 |--|--|
@@ -69,9 +64,7 @@ Uniform Hemisphere Sampling
 It is easy to see that uniform hemisphere sampling is, on average, noisier than importance light sampling even with the same ligh rays, rays per pixel, etc. Importance does a good job at producing smooth shadows since it is more accurate to actual light sampling. 
 
 
-<center>
-CBbunny.png with different number of light rays
-</center>
+### CBbunny.png with different number of light rays
 
 | ![](CBbunny1.png)  <center>1 light ray</center>|
 |--|
@@ -91,17 +84,14 @@ In this task, I implemented global illumination. To do this, I implemented an in
 I then established another termination method using the russian-roulette method, giving it a 30% chance of terminating and for the ray to stop bouncing. If it passed, I would create a new ray object which with the direction transformed into world space, and mitigate the valid intersection range issue using `EPS_F`. If there was an intersection (using the `intersect()` function), then I would recurse on the next location and determine how much light should be sent to the next bounce. 
 
 
-<center>
-1024 samples per pixel, 16 samples per area light, max ray depth of 5
-</center>
+### 1024 samples per pixel, 16 samples per area light, max ray depth of 5
+
 
 | ![](4.1.png)  <center><b>*CBbunny.png*</b></center>| ![](4.2.png)  <center><b>*CBspheres.png*</b></center>|
 |--|--|
 
 
-<center>
-1024 samples per pixel, 4 samples per area light, max ray depth of 5, <b>Direct vs Indirect lighting </b>
-</center>
+### 1024 samples per pixel, 4 samples per area light, max ray depth of 5, Direct vs Indirect lighting
 
 | ![](4.3.png)  <center>Direct Bunny</center>| ![](4.4.png)  <center>Indirect Bunny</center>|
 |--|--|
@@ -109,9 +99,7 @@ I then established another termination method using the russian-roulette method,
 - We can see in the direct lighting (left) how there is no bouncing based on the fact that only the light at the top of the box, and the rays that are shining from the light are present. 
 - On the left, we can see how there are only indirect bounces (such as light from the walls and ground) since there is less shadow in the right one, and the bottom is more well lit (indicating one bounces). Furthermore, the light at the top off the box is completely black, indicating that there zero-bounce is not included.
 
-<center>
-1024 samples per pixel, 4 samples per area light, max ray depth of 5, <b>max_ray_depth set to 0, 1, 2, 3, 4, 5, and 100</b>
-</center>
+### 1024 samples per pixel, 4 samples per area light, max ray depth of 5, max_ray_depth set to 0, 1, 2, 3, 4, 5, and 100
 
 | ![](4.5.png)  <center>depth = 0</center>| ![](4.6.png)  <center>depth = 1</center>|
 |--|--|
@@ -141,11 +129,9 @@ Adaptive sampling is used to reduce the number of samples per pixels by only sam
 
 
 
-<center>
-2048 samples per pixel, 1 sample per light, 5 for max ray depth, 32 for samplesPerBatch, and 0.10 for maxTolerance. 
+### 2048 samples per pixel, 1 sample per light, 5 for max ray depth, 32 for samplesPerBatch, and 0.10 for maxTolerance. 
 
 (Blue coloring represents low sampling rates, while red coloring represents high sampling rates)
-</center>
 
 | ![](spheresfinal.png)  <center>cbspheres.png</center>| ![](spheresfinal_rate.png)  <center>cbspheres_rate.png</center>|
 |--|--|
