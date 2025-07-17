@@ -1,4 +1,7 @@
-
+---
+layout: default
+title: Homework 2
+---
 <h1 style="text-align: center;">Homework 2: Mesh Edit</h1>
 <h2 style="text-align: center;">David Ban </h2>
 <h2 style="text-align: center;">Sp 2024 </h2>
