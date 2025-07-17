@@ -1,1 +1,11 @@
 theme: jekyll-theme-cayman
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+include:
+  - hw1.md
+  - hw2.md
+  - hw3.md
+  - hw4.md
